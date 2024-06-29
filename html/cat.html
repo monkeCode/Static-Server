@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Cat Picture with Cute Sound</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        #catImage {
+            max-width: 500px;
+            max-height: 500px;
+            margin-bottom: 20px;
+        }
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <img id="catImage" src="" alt="Random Cat">
+    <button onclick="getNewCat()">Get New Cat</button>
+
+
+    <script>
+        function getNewCat() {
+            fetch('https://api.thecatapi.com/v1/images/search')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('catImage').src = data[0].url;
+                    playCuteSound();
+                })
+                .catch(error => console.error('Error:', error));
+        }
+        // Load initial cat image
+        getNewCat();
+    </script>
+</body>
+</html>
